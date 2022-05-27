@@ -22,16 +22,22 @@
 
         $sql = "SELECT `students`.*,`dept`.`code`,`dept`.`name` as '科系' FROM `students`,`dept` WHERE `dept`.`id`=`students`.`dept`";
         // $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_BOTH);
-        $query = mysqli_query($conn,$sql,);
-        $rows = mysqli_fetch_all($query,MYSQLI_BOTH);
+        $query = mysqli_query($conn,$sql);
+        // $rows = mysqli_fetch_all($query,MYSQLI_BOTH);
         // echo var_dump($query);
-
-        // echo "<pre>";
-        // print_r($rows);
-        // echo "</pre>";
-        echo $rows[0][3];
-        echo "<br>";
-        echo $rows[0]['birthday'];
+        $count = 0;
+        while($rows=mysqli_fetch_array($query,MYSQLI_BOTH)) {
+            if($rows['name']=='王鳳如'){
+                echo "<pre>";
+                print_r($rows);
+                echo "</pre>";
+            }
+            $count++;
+        }
+        echo $count;
+        // echo $rows[0][3];
+        // echo "<br>";
+        // echo $rows[0]['birthday'];
 
 
     ?>
