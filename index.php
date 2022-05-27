@@ -40,7 +40,21 @@
 
         $sql = "SELECT `students`.*,`dept`.`code`,`dept`.`name` as '科系' FROM `students`,`dept` WHERE `dept`.`id`=`students`.`dept`";
         $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        echo "<table>";
+        /*     echo "<table>"; 用FOR迴圈撈出資料
+    for($i=0;$i<count($rows);$i=$i+1){
+            $key=$i;
+            $row=$rows[$i];
+        echo "<tr>";
+            echo "<td>這是索引值第{$key}的資料</td>";
+            echo "<td>{$row['id']}</td>";
+            echo "<td>{$row['school_num']}</td>";
+            echo "<td>{$row['name']}</td>";
+            echo "<td>{$row['科系']}</td>";
+            echo "<td>{$row['parents']}</td>";
+        echo "</tr>";
+    }
+    echo "</table>"; */
+        echo "<table>"; //用FOREACH撈出資料
         foreach($rows as $row){
             echo "<tr>";
                 echo"<td>{$row['id']}</td>";
