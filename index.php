@@ -35,43 +35,43 @@
     <h1>PHP連線資料庫</h1>
     <!-- PDO連結方式 -->
     <?php
-        $dsn = "mysql:host=localhost;charset=utf8;dbname=school2";
+        $dsn = "mysql:host=localhost;charset=utf8;dbname=school";
         $pdo = new PDO($dsn,'root','');
 
-        $sql = "SELECT `students`.*,`dept`.`code`,`dept`.`name` as '科系' FROM `students`,`dept` WHERE `dept`.`id`=`students`.`dept`";
+        $sql = "SELECT `students`.* FROM `students`";
         $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        /*     echo "<table>"; 用FOR迴圈撈出資料
-    for($i=0;$i<count($rows);$i=$i+1){
-            $key=$i;
-            $row=$rows[$i];
-        echo "<tr>";
-            echo "<td>這是索引值第{$key}的資料</td>";
-            echo "<td>{$row['id']}</td>";
-            echo "<td>{$row['school_num']}</td>";
-            echo "<td>{$row['name']}</td>";
-            echo "<td>{$row['科系']}</td>";
-            echo "<td>{$row['parents']}</td>";
-        echo "</tr>";
-    }
-    echo "</table>"; */
-        echo "<table>"; //用FOREACH撈出資料
-        foreach($rows as $row){
+    ?>
+        <h3><button><a href="add.php">新增學生資料</a></button></h3>
+        <h3><form action="add.php" method="get"><button >新增學生資料</button></form></h3>
+        <h3><button onclick="location.href='add.php'">新增學生資料</button></h3>
+        <table> <!--用FOREACH撈出資料 -->
+        <tr>
+                <td>序號</td>
+                <td>學號</td>
+                <td>學生性名</td>
+                <td>科系</td>
+                <td>父母</td>
+                <td>地址</td>
+                <td>畢業國中</td>
+                <td>操作</td>
+            </tr>
+    <?php
+            foreach($rows as $row){
             echo "<tr>";
                 echo"<td>{$row['id']}</td>";
-                echo"<td>{$row['school_num']}</td>";
+                echo"<td>{$row['uni_id']}</td>";
                 echo"<td>{$row['name']}</td>";
-                echo"<td>{$row['科系']}</td>";
-                echo"<td>{$row['parents']}</td>";
-                echo"<td>{$row['addr']}</td>";
+                echo"<td>{$row['major']}</td>";
+                echo"<td>{$row['parent']}</td>";
+                echo"<td>{$row['address']}</td>";
+                echo"<td>{$row['secondary']}</td>";
+                echo "<td>";
+                echo "<button><a href='edit.php?id={$row['id']}'>編輯</a></button>";
+                echo "<button><a href='del.php?id={$row['id']}'>刪除</a></button>";
+                echo "</td>";
             echo "</tr>";
         }
         echo "</table>";
-        // echo "<pre>";
-        // print_r($rows);
-        // echo "</pre>";
-        // echo $rows[0][0];
-        // echo "<br>";
-        // echo $rows[0]['id'];
 
 
     ?>
